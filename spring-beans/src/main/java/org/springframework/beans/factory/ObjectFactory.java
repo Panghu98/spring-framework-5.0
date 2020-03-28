@@ -44,6 +44,11 @@ public interface ObjectFactory<T> {
 	 * @return the resulting instance
 	 * @throws BeansException in case of creation errors
 	 */
+	/**
+	 * 它可以将创建对象的步骤封装到ObjectFactory中 交给自定义的Scope来选择是否需要创建对象来灵活的实现scope。  具体参见Scope接口
+	 * @return
+	 * @throws BeansException
+	 */
 	T getObject() throws BeansException;
 
 }

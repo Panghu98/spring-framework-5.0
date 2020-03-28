@@ -523,6 +523,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 						"' to allow for resolving potential circular references");
 			}
 			// 将Bean从earlySingletonObjects移除，添加到singletonFactories
+			// // 允许暴露，就把A绑定在ObjectFactory上，注册到三级缓存`singletonFactories`里面去保存着
+			//	// Tips:这里后置处理器的getEarlyBeanReference方法会被促发，
+			//	自动代理创建器在此处创建代理对象（注意执行时机 为执行三级缓存的时候）
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
@@ -532,6 +535,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// 执行 	InstantiationAwareBeanPostProcessor的 postProcessAfterInstantiation和 postProcessPropertyValues
 			// 进行属性填充，解决@Autowired
 			populateBean(beanName, mbd, instanceWrapper);
+			// 执行初始化方法
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
@@ -547,6 +551,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (earlySingletonExposure) {
 			Object earlySingletonReference = getSingleton(beanName, false);
 			if (earlySingletonReference != null) {
+				// 这一句如果exposedObject == bean表示最终返回的对象就是原始对象，说明在populateBean和initializeBean没对他代理过，
+				// 那就啥话都不说了exposedObject = earlySingletonReference，最终把二级缓存里的引用返回即可~
 				if (exposedObject == bean) {
 					exposedObject = earlySingletonReference;
 				}

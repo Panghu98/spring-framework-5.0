@@ -4,3 +4,4 @@
 
 ## DefaultSingletonBeanRegistry的三级缓存
 [参考](https://cloud.tencent.com/developer/article/1497692)
+![Bean对象在三级缓存位置变化](spring-demo/src/main/resources/Spring的三级缓存状态分析.png)
