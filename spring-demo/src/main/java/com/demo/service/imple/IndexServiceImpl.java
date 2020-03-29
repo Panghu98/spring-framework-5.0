@@ -1,6 +1,7 @@
 package com.demo.service.imple;
 
 import com.demo.dao.A;
+import com.demo.dao.IndexDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 public  class IndexServiceImpl {
 
 	@Autowired
-	private A a;
+	private IndexDao dao;
 
 	public void setA(A a) {
 		System.err.println("====================");
@@ -22,7 +23,7 @@ public  class IndexServiceImpl {
 
 
 	public void find() {
-		a.hello();
+		dao.query();
 	}
 
 }

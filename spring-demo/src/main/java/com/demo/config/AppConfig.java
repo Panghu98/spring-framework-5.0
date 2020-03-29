@@ -13,6 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan("com.demo")
 @Configuration("config")
 @EnableAspectJAutoProxy(exposeProxy = true)
+// 注意，这里左边有个绿色的图标才可以
 public class AppConfig {
 
 }

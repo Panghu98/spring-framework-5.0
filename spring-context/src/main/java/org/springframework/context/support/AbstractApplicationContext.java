@@ -510,7 +510,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				//设置执
 				// 行自定义的BeanFactoryPostProcessor和Spring内部自定义的(ConfigurationClassPostProcessor)
 				//该方法实质上是调用PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors（）
-				// 完成对所有ConfigurationClass的BD扫描
+				// 完成对所有ConfigurationClass的BD扫描，对Full Configuration类进行增强
 				// BeanFactoryPostProcessor的子接口BeanDefinitionRegistryPostProcessor会完成对BD的注册
 				invokeBeanFactoryPostProcessors(beanFactory);
 

@@ -246,6 +246,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 		// enhance -- （这里理解为增强 AOP）
 		enhanceConfigurationClasses(beanFactory);
+		//ImportAwareBeanPostProcessor 这个类很重要
 		beanFactory.addBeanPostProcessor(new ImportAwareBeanPostProcessor(beanFactory));
 	}
 
@@ -410,7 +411,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 							logger.debug(String.format("Replacing bean definition '%s' existing class '%s' with " +
 									"enhanced class '%s'", entry.getKey(), configClass.getName(), enhancedClass.getName()));
 						}
-						// 个人思考，到了这里还并没有进行实例化，而是将类信息进行了更改，更改成了CGLIB的代理类
+						// 修改BeanDefinition的Class信息，将其转换成增强类
 						beanDef.setBeanClass(enhancedClass);
 					}
 				}

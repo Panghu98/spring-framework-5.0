@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceLogger {
 
-	@Pointcut("execution(public * com.demo.service.imple.IndexServiceImpl.find(..))")
+	@Pointcut(value = "execution(* com.demo.service.imple.IndexServiceImpl.find())")
 	public void service(){
 	}
 
-	@Before("service()")
+	@Before(value = "com.demo.aop.ServiceLogger.service()")
 	public void before(JoinPoint joinPoint){
 		Signature signature = joinPoint.getSignature();
 		String method = signature.getDeclaringTypeName()+"."+signature.getName();
